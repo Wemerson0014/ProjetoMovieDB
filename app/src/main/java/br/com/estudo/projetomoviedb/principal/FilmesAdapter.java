@@ -1,6 +1,6 @@
 package br.com.estudo.projetomoviedb.principal;
 import br.com.estudo.projetomoviedb.R;
-import br.com.estudo.projetomoviedb.model.Filmes;
+import br.com.estudo.projetomoviedb.model.Filme;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,9 +13,9 @@ import com.bumptech.glide.Glide;
 
 public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHolder> {
 
-    private List<Filmes> filmes;
+    private List<Filme> filmes;
 
-    FilmesAdapter(List<Filmes> filmes) {
+    FilmesAdapter(List<Filme> filmes) {
         this.filmes = filmes;
     }
 
@@ -30,10 +30,9 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
     @Override
     public void onBindViewHolder(@NonNull MeuViewHolder meuViewHolder, int position) {
 
-        Filmes filmes = this.filmes.get(position);
-        meuViewHolder.configuraView(filmes);
+        Filme filme = this.filmes.get(position);
+        meuViewHolder.configuraView(filme);
     }
-
 
     @Override
     public int getItemCount() {
@@ -54,11 +53,11 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
             capa = itemView.findViewById(R.id.imagemCapa);
         }
 
-        private void configuraView(final Filmes filmes){
-            nome.setText(filmes.getNome());
-            duracao.setText(filmes.getDuracao());
+        private void configuraView(final Filme filme){
+            nome.setText(filme.getNome());
+            duracao.setText(filme.getDuracao());
             Glide.with(itemView.getContext())
-                    .load(filmes.getCapa())
+                    .load(filme.getCapa())
                     .into(capa);
 
         }

@@ -1,6 +1,6 @@
 package br.com.estudo.projetomoviedb.model;
 
-public class Filmes {
+public class Filme {
 
     private final String nome;
     private final String duracao;
@@ -18,7 +18,7 @@ public class Filmes {
         return capa;
     }
 
-    public Filmes(String nome, String duracao, String capa) {
+    public Filme(String nome, String duracao, String capa) {
         this.nome = nome;
         this.duracao = duracao;
         this.capa = capa;
