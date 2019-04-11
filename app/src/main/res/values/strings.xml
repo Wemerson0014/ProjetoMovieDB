@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Projeto MovieDB</string>
+    <string name="text_nome">Nome do filme</string>
+    <string name="text_duracao">Tempo de duração do filme</string>
+    <string name="imagem_capa">Capa do filme</string>
 </resources>
