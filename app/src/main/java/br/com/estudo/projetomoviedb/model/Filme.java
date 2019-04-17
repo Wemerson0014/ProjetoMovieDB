@@ -18,6 +18,8 @@ public class Filme implements Parcelable {
     private final String sinopse;
     @SerializedName("imdb_id")
     private final String imdb;
+    @SerializedName("backdrop_path")
+    private final String poster;
 
     private Filme(Parcel in) {
         nome = in.readString();
@@ -27,6 +29,7 @@ public class Filme implements Parcelable {
         video = tmpVideo == 0 ? null : tmpVideo == 1;
         sinopse = in.readString();
         imdb = in.readString();
+        poster = in.readString();
     }
 
     public static final Creator<Filme> CREATOR = new Creator<Filme>() {
@@ -59,13 +62,16 @@ public class Filme implements Parcelable {
 
     public String getImdb() { return  imdb; }
 
-    public Filme(String nome, String estreia, String capa, Boolean video, String sinopse, String imdb) {
+    public String getPoster() { return  poster; }
+
+    public Filme(String nome, String estreia, String capa, Boolean video, String sinopse, String imdb, String poster) {
         this.nome = nome;
         this.estreia = estreia;
         this.capa = capa;
         this.video = video;
         this.sinopse = sinopse;
         this.imdb = imdb;
+        this.poster = poster;
     }
 
     @Override
@@ -81,5 +87,6 @@ public class Filme implements Parcelable {
         dest.writeValue(video);
         dest.writeString(sinopse);
         dest.writeString(imdb);
+        dest.writeString(poster);
     }
 }

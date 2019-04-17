@@ -14,9 +14,11 @@ import com.bumptech.glide.Glide;
 public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHolder> {
 
     private List<Filme> filmes;
+    private OnClickListener onClickListener;
 
-    FilmesAdapter(List<Filme> filmes){
+    FilmesAdapter(List<Filme> filmes , OnClickListener onClickListener) {
         this.filmes = filmes;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -31,7 +33,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
     public void onBindViewHolder(@NonNull MeuViewHolder meuViewHolder, int position) {
 
         Filme filme = this.filmes.get(position);
-        meuViewHolder.configuraView(filme);
+        meuViewHolder.configuraView(filme, onClickListener);
     }
 
     @Override
@@ -53,12 +55,18 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
             capa = itemView.findViewById(R.id.imagemCapa);
         }
 
-        private void configuraView(final Filme filme){
+        private void configuraView(final Filme filme , final OnClickListener onClickListener){
             nome.setText(filme.getNome());
             duracao.setText(filme.getEstreia());
             Glide.with(itemView.getContext())
                     .load("https://image.tmdb.org/t/p/w342" + filme.getCapa())
                     .into(capa);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.filmeCliclado(filme);
+                }
+            });
         }
     }
 }
