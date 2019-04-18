@@ -44,20 +44,20 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
     class MeuViewHolder extends RecyclerView.ViewHolder {
 
         TextView nome;
-        TextView duracao;
+        TextView estreia;
         ImageView capa;
 
         MeuViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nome = itemView.findViewById(R.id.textNome);
-            duracao = itemView.findViewById(R.id.textDuracao);
-            capa = itemView.findViewById(R.id.imagemCapa);
+            estreia = itemView.findViewById(R.id.textEstreia);
+            capa = itemView.findViewById(R.id.imageCapa);
         }
 
         private void configuraView(final Filme filme , final OnClickListener onClickListener){
             nome.setText(filme.getNome());
-            duracao.setText(filme.getEstreia());
+            estreia.setText(filme.getEstreia());
             Glide.with(itemView.getContext())
                     .load("https://image.tmdb.org/t/p/w342" + filme.getCapa())
                     .into(capa);

@@ -1,5 +1,6 @@
 package br.com.estudo.projetomoviedb.model;
 
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,28 +8,33 @@ import com.google.gson.annotations.SerializedName;
 
 public class Filme implements Parcelable {
 
-    @SerializedName("original_title")
-    private final String nome;
-    @SerializedName("release_date")
-    private final String estreia;
     @SerializedName("poster_path")
     private final String capa;
-    private final Boolean video;
     @SerializedName("overview")
     private final String sinopse;
-    @SerializedName("imdb_id")
-    private final String imdb;
+    @SerializedName("release_date")
+    private final String estreia;
+    private final int id;
+    @SerializedName("original_title")
+    private final String nome;
     @SerializedName("backdrop_path")
     private final String poster;
 
-    private Filme(Parcel in) {
-        nome = in.readString();
-        estreia = in.readString();
+    public Filme(String capa, String sinopse, String estreia, int id, String nome, String poster) {
+        this.capa = capa;
+        this.sinopse = sinopse;
+        this.estreia = estreia;
+        this.id = id;
+        this.nome = nome;
+        this.poster = poster;
+    }
+
+    Filme(Parcel in) {
         capa = in.readString();
-        byte tmpVideo = in.readByte();
-        video = tmpVideo == 0 ? null : tmpVideo == 1;
         sinopse = in.readString();
-        imdb = in.readString();
+        estreia = in.readString();
+        id = in.readInt();
+        nome = in.readString();
         poster = in.readString();
     }
 
@@ -44,34 +50,28 @@ public class Filme implements Parcelable {
         }
     };
 
-    public String getNome() {
-        return nome;
+    public String getCapa() {
+        return capa;
+    }
+
+    public String getSinopse() {
+        return sinopse;
     }
 
     public String getEstreia() {
         return estreia;
     }
 
-    public String getCapa() {
-        return capa;
+    public int getId() {
+        return id;
     }
 
-    public Boolean getVideo() { return  video; }
+    public String getNome() {
+        return  nome;
+    }
 
-    public String getSinopse() { return  sinopse; }
-
-    public String getImdb() { return  imdb; }
-
-    public String getPoster() { return  poster; }
-
-    public Filme(String nome, String estreia, String capa, Boolean video, String sinopse, String imdb, String poster) {
-        this.nome = nome;
-        this.estreia = estreia;
-        this.capa = capa;
-        this.video = video;
-        this.sinopse = sinopse;
-        this.imdb = imdb;
-        this.poster = poster;
+    public String getPoster() {
+        return poster;
     }
 
     @Override
@@ -81,12 +81,14 @@ public class Filme implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(nome);
-        dest.writeString(estreia);
+
         dest.writeString(capa);
-        dest.writeValue(video);
         dest.writeString(sinopse);
-        dest.writeString(imdb);
+        dest.writeString(estreia);
+        dest.writeInt(id);
+        dest.writeString(nome);
         dest.writeString(poster);
     }
 }
+
+

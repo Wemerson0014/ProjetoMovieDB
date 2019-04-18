@@ -16,7 +16,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalhes_filmes);
+        setContentView(R.layout.activity_detalhes_filme);
 
         filme = getIntent().getParcelableExtra(EXTRA_FIME);
         CriaLayout();
@@ -26,15 +26,17 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
 
         ImageView poster;
         TextView nome;
+        TextView sinopse;
 
         poster = findViewById(R.id.imagePoster);
         nome = findViewById(R.id.textNome);
+        sinopse = findViewById(R.id.textSinopse);
 
         Glide.with(this)
                 .load("https://image.tmdb.org/t/p/w300" + filme.getPoster())
                 .placeholder(R.drawable.ic_cinema)
                 .into(poster);
         nome.setText(filme.getNome());
-
+        sinopse.setText(filme.getSinopse());
     }
 }
