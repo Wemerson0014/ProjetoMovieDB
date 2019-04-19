@@ -16,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity.EXTRA_FIME;
+import static br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity.EXTRA_ID_FIME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void filmeCliclado(Filme filme) {
                 Intent intent = new Intent(getApplicationContext(), DetalhesFilmesActivity.class);
-                intent.putExtra(EXTRA_FIME, filme);
+                intent.putExtra(EXTRA_ID_FIME, filme.getId());
                 startActivity(intent);
             }
         });
