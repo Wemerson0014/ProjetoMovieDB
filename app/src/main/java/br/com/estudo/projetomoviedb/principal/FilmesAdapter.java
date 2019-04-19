@@ -15,7 +15,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
 
     private List<Filme> filmes;
 
-    FilmesAdapter(List<Filme> filmes) {
+    FilmesAdapter(List<Filme> filmes){
         this.filmes = filmes;
     }
 
@@ -55,11 +55,10 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
 
         private void configuraView(final Filme filme){
             nome.setText(filme.getNome());
-            duracao.setText(filme.getDuracao());
+            duracao.setText(filme.getEstreia());
             Glide.with(itemView.getContext())
-                    .load(filme.getCapa())
+                    .load("https://image.tmdb.org/t/p/w342" + filme.getCapa())
                     .into(capa);
-
         }
     }
 }
