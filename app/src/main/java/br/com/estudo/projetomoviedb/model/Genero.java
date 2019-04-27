@@ -1,7 +1,8 @@
 package br.com.estudo.projetomoviedb.model;
+
 import com.google.gson.annotations.SerializedName;
 
-class Genero {
+public class Genero {
     private final int id;
     @SerializedName("name")
     private final String nome;
@@ -18,4 +19,5 @@ class Genero {
     public String getNome() {
         return nome;
     }
+
 }

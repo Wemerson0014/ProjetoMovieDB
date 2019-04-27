@@ -1,4 +1,5 @@
 package br.com.estudo.projetomoviedb.model;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Filme {
@@ -34,5 +35,3 @@ public class Filme {
         return estreia;
     }
 }
-
-

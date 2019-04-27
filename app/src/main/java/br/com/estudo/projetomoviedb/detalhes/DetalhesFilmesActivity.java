@@ -1,5 +1,8 @@
 package br.com.estudo.projetomoviedb.detalhes;
 
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -7,9 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
+
+import java.util.List;
 
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.model.DetalheFilme;
+import br.com.estudo.projetomoviedb.model.Genero;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,23 +38,57 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
 
     public void configuraLayout(DetalheFilme detalheFilme) {
 
-        ImageView poster;
-        TextView nome;
+        final ImageView poster;
         TextView sinopse;
+        ImageView capa;
+        TextView avaliacao;
+        TextView nome;
+        TextView duracao;
+        TextView genero;
 
-        poster = findViewById(R.id.imagePoster);
-        nome = findViewById(R.id.textNome);
         sinopse = findViewById(R.id.textSinopse);
+        poster = findViewById(R.id.imagePoster);
+        capa = findViewById(R.id.imageCapa);
+        avaliacao = findViewById(R.id.textAvaliacao);
+        nome = findViewById(R.id.textNome);
+        duracao = findViewById(R.id.textDuracaoFilme);
+        genero = findViewById(R.id.textGenero);
+
+        sinopse.setText(detalheFilme.getSinopse());
+        Glide.with(this)
+                .load("https://image.tmdb.org/t/p/w300" + detalheFilme.getPoster())
+                .placeholder(R.drawable.ic_cinema)
+                .into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        poster.setBackground(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
 
         Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w300" + detalheFilme.getCapa())
-                .placeholder(R.drawable.ic_cinema)
-                .into(poster);
+                .load("https://image.tmdb.org/t/p/w342" + detalheFilme.getCapa())
+                .into(capa);
+        avaliacao.setText((detalheFilme.getAvaliacao() + ("/10")));
         nome.setText(detalheFilme.getNomeFilme());
-        sinopse.setText(detalheFilme.getSinopse());
+        duracao.setText((detalheFilme.getTempoFilme() + (" minutos")));
+        genero.setText(generoFormatado(detalheFilme.getGeneros()));
     }
 
-    public void buscaDetalheFilmePorId(int idFilme) {
+    private String generoFormatado(List<Genero> generos) {
+
+        StringBuilder nomeGenero = new StringBuilder();
+        for (int i = 0; i < generos.size(); i++) {
+            nomeGenero.append(generos.get(i).getNome()).append(", ");
+        }
+        return nomeGenero.substring(0, nomeGenero.length() - 2);
+    }
+
+    private void buscaDetalheFilmePorId(int idFilme) {
 
         Call<DetalheFilme> call = new RetrofitConfiguracao().apiservice().getDetalheFilmePorId(idFilme);
         call.enqueue(new Callback<DetalheFilme>() {

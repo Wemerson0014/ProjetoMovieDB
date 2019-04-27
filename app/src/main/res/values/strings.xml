@@ -4,6 +4,8 @@
     <string name="text_estreia">Data de estreia do filme</string>
     <string name="text_sinopse">Sinopse</string>
     <string name="text_genero">Genero</string>
-    <string name="text_imdb">IMDB</string>
     <string name="image_capa">Capa do filme</string>
+    <string name="text_avaliacao">Avaliacao, %s</string>
+    <string name="text_duracao_filme">Duracao do filme, %s</string>
+    <string name="text_minutos">minutos, %s</string>
 </resources>

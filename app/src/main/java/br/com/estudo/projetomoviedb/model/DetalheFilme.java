@@ -11,8 +11,8 @@ public class DetalheFilme {
     private final String nomeFilme;
     @SerializedName("overview")
     private final String sinopse;
-    @SerializedName("genre")
-    private final List<Genero> genero;
+    @SerializedName("genres")
+    private final List<Genero> generos;
     @SerializedName("runtime")
     private final int tempoFilme;
     @SerializedName("vote_average")
@@ -22,11 +22,11 @@ public class DetalheFilme {
     @SerializedName("poster_path")
     private final String capa;
 
-    public DetalheFilme(int id, String nomeFilme, String sinopse, List<Genero> genero, int tempoFilme, float avaliacao, String poster, String capa) {
+    public DetalheFilme(int id, String nomeFilme, String sinopse, List<Genero> generos, int tempoFilme, float avaliacao, String poster, String capa) {
         this.id = id;
         this.nomeFilme = nomeFilme;
         this.sinopse = sinopse;
-        this.genero = genero;
+        this.generos = generos;
         this.tempoFilme = tempoFilme;
         this.avaliacao = avaliacao;
         this.poster = poster;
@@ -45,8 +45,8 @@ public class DetalheFilme {
         return sinopse;
     }
 
-    public List<Genero> getGenero() {
-        return genero;
+    public List<Genero> getGeneros() {
+        return generos;
     }
 
     public int getTempoFilme() {

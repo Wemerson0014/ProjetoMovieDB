@@ -1,11 +1,14 @@
 package br.com.estudo.projetomoviedb.principal;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+
 import java.util.List;
+
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity;
 import br.com.estudo.projetomoviedb.model.Filme;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerFilmes);
 
-        FilmesAdapter filmesAdapter = new FilmesAdapter(filmes , new OnClickListener() {
+        FilmesAdapter filmesAdapter = new FilmesAdapter(filmes, new OnClickListener() {
             @Override
             public void filmeCliclado(Filme filme) {
                 Intent intent = new Intent(getApplicationContext(), DetalhesFilmesActivity.class);
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void buscaFilmes(){
+    public void buscaFilmes() {
 
         ApiService apiService = new RetrofitConfiguracao().apiservice();
         Call<ResponseFilme> call = apiService.getTodosFilmes();

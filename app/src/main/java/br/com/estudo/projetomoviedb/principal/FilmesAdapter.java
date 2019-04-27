@@ -1,6 +1,8 @@
 package br.com.estudo.projetomoviedb.principal;
+
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.model.Filme;
+
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.List;
+
 import com.bumptech.glide.Glide;
 
 public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHolder> {
@@ -16,7 +20,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
     private List<Filme> filmes;
     private OnClickListener onClickListener;
 
-    FilmesAdapter(List<Filme> filmes , OnClickListener onClickListener) {
+    FilmesAdapter(List<Filme> filmes, OnClickListener onClickListener) {
         this.filmes = filmes;
         this.onClickListener = onClickListener;
     }
@@ -55,7 +59,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
             capa = itemView.findViewById(R.id.imageCapa);
         }
 
-        private void configuraView(final Filme filme , final OnClickListener onClickListener){
+        private void configuraView(final Filme filme, final OnClickListener onClickListener) {
             nome.setText(filme.getNome());
             estreia.setText(filme.getEstreia());
             Glide.with(itemView.getContext())
