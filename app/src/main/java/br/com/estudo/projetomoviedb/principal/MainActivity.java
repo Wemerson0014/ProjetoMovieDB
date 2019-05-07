@@ -24,17 +24,15 @@ import static br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity.EXTRA
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int PRGRESSBAR_PRINCIPAL = 0;
     public static final int CONTEUDO_PRINCIPAL = 1;
-    private ViewFlipper viewFlipper;
+    private ViewFlipper viewFlipperPrincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewFlipper = findViewById(R.id.viewFlipperPrincipal);
-        viewFlipper.setDisplayedChild(PRGRESSBAR_PRINCIPAL);
+        viewFlipperPrincipal = findViewById(R.id.viewFlipperPrincipal);
         buscaFilmes();
 
     }
@@ -69,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseFilme> call, Response<ResponseFilme> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    viewFlipper.setDisplayedChild(CONTEUDO_PRINCIPAL);
                     List<Filme> filmes = response.body().getFilmes();
                     configuraRecyclerView(filmes);
+                    viewFlipperPrincipal.setDisplayedChild(CONTEUDO_PRINCIPAL);
                 }
             }
 

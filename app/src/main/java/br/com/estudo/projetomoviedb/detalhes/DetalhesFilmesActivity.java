@@ -27,17 +27,15 @@ import retrofit2.Response;
 public class DetalhesFilmesActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID_FIME = "extra_id_filme";
-    public static final int PRGRESSBAR_DETALHES = 0;
     public static final int CONTEUDO_DETALHES = 1;
-    private ViewFlipper viewFlipper;
+    private ViewFlipper viewFlipperDetalhes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_filme);
 
-        viewFlipper = findViewById(R.id.viewFlipper);
-        viewFlipper.setDisplayedChild(PRGRESSBAR_DETALHES);
+        viewFlipperDetalhes = findViewById(R.id.viewFlipperDetalhes);
         int idFilme = getIntent().getIntExtra(EXTRA_ID_FIME, -1);
         buscaDetalheFilmePorId(idFilme);
     }
@@ -101,9 +99,9 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DetalheFilme> call, Response<DetalheFilme> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    viewFlipper.setDisplayedChild(CONTEUDO_DETALHES);
                     DetalheFilme detalheFilme = response.body();
                     configuraLayout(detalheFilme);
+                    viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
                 }
             }
 
