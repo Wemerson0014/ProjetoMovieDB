@@ -1,104 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewFlipperDetalhes"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/prgressbarCarremento"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context=".detalhes.DetalhesFilmesActivity">
+        android:layout_gravity="center" />
 
-        <TextView
-            android:id="@+id/textSinopse"
-            android:layout_width="0dp"
+    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <android.support.constraint.ConstraintLayout
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:lineSpacingExtra="8sp"
-            android:text="@string/text_sinopse"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/imageCapa"
-            app:layout_constraintTop_toBottomOf="@+id/imageCapa"
-            app:layout_constraintVertical_bias="1.0" />
+            tools:context=".detalhes.DetalhesFilmesActivity">
 
-        <ImageView
-            android:id="@+id/imagePoster"
-            android:layout_width="0dp"
-            android:layout_height="300dp"
-            tools:background="@drawable/ic_cinema"
-            android:contentDescription="@string/image_capa"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/gradient" />
+            <TextView
+                android:id="@+id/textSinopse"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/text_sinopse"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/imageCapa"
+                app:layout_constraintTop_toBottomOf="@+id/imageCapa" />
 
+            <ImageView
+                android:id="@+id/imagePoster"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:contentDescription="@string/image_capa"
+                android:scaleType="centerCrop"
+                android:src="@drawable/gradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/ic_cinema" />
 
-        <ImageView
-            android:id="@+id/imageCapa"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="240dp"
-            android:contentDescription="@string/image_capa"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imagePoster"
-            app:srcCompat="@drawable/ic_cinema" />
+            <ImageView
+                android:id="@+id/imageCapa"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="240dp"
+                android:contentDescription="@string/image_capa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imagePoster"
+                app:srcCompat="@drawable/ic_cinema" />
 
-        <TextView
-            android:id="@+id/textAvaliacao"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:drawableStart="@drawable/ic_imd_preto"
-            android:drawablePadding="4dp"
-            android:gravity="center_vertical"
-            android:text="@string/text_avaliacao"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageCapa"
-            app:layout_constraintTop_toTopOf="@+id/imageCapa" />
+            <TextView
+                android:id="@+id/textAvaliacao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:drawableStart="@drawable/ic_imd_preto"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:text="@string/text_avaliacao"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageCapa"
+                app:layout_constraintTop_toTopOf="@+id/imageCapa" />
 
-        <TextView
-            android:id="@+id/textNome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/text_nome"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textAvaliacao"
-            app:layout_constraintStart_toStartOf="@+id/textAvaliacao"
-            app:layout_constraintTop_toBottomOf="@+id/textAvaliacao" />
+            <TextView
+                android:id="@+id/textNome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_nome"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textAvaliacao"
+                app:layout_constraintStart_toStartOf="@+id/textAvaliacao"
+                app:layout_constraintTop_toBottomOf="@+id/textAvaliacao" />
 
-        <TextView
-            android:id="@+id/textDuracaoFilme"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/text_duracao_filme"
-            app:layout_constraintEnd_toEndOf="@+id/textNome"
-            app:layout_constraintStart_toStartOf="@+id/textNome"
-            app:layout_constraintTop_toBottomOf="@+id/textNome" />
+            <TextView
+                android:id="@+id/textDuracaoFilme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_duracao_filme"
+                app:layout_constraintEnd_toEndOf="@+id/textNome"
+                app:layout_constraintStart_toStartOf="@+id/textNome"
+                app:layout_constraintTop_toBottomOf="@+id/textNome" />
 
-        <TextView
-            android:id="@+id/textGenero"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/text_genero"
-            app:layout_constraintEnd_toEndOf="@+id/textDuracaoFilme"
-            app:layout_constraintStart_toStartOf="@+id/textDuracaoFilme"
-            app:layout_constraintTop_toBottomOf="@+id/textDuracaoFilme" />
+            <TextView
+                android:id="@+id/textGenero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_genero"
+                app:layout_constraintEnd_toEndOf="@+id/textDuracaoFilme"
+                app:layout_constraintStart_toStartOf="@+id/textDuracaoFilme"
+                app:layout_constraintTop_toBottomOf="@+id/textDuracaoFilme" />
 
-
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</ViewFlipper>

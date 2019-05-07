@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -26,12 +27,15 @@ import retrofit2.Response;
 public class DetalhesFilmesActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID_FIME = "extra_id_filme";
+    public static final int CONTEUDO_DETALHES = 1;
+    private ViewFlipper viewFlipperDetalhes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_filme);
 
+        viewFlipperDetalhes = findViewById(R.id.viewFlipperDetalhes);
         int idFilme = getIntent().getIntExtra(EXTRA_ID_FIME, -1);
         buscaDetalheFilmePorId(idFilme);
     }
@@ -97,6 +101,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     DetalheFilme detalheFilme = response.body();
                     configuraLayout(detalheFilme);
+                    viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
                 }
             }
 

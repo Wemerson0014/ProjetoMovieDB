@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import java.util.List;
 
@@ -23,11 +24,15 @@ import static br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity.EXTRA
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int CONTEUDO_PRINCIPAL = 1;
+    private ViewFlipper viewFlipperPrincipal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        viewFlipperPrincipal = findViewById(R.id.viewFlipperPrincipal);
         buscaFilmes();
 
     }
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Filme> filmes = response.body().getFilmes();
                     configuraRecyclerView(filmes);
+                    viewFlipperPrincipal.setDisplayedChild(CONTEUDO_PRINCIPAL);
                 }
             }
 
