@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,8 +20,11 @@ import java.util.List;
 
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.model.DetalheFilme;
+import br.com.estudo.projetomoviedb.model.FilmeSimilar;
 import br.com.estudo.projetomoviedb.model.Genero;
+import br.com.estudo.projetomoviedb.model.ResponseFilmeSimilar;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
+import br.com.estudo.projetomoviedb.principal.FilmeSimilarAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +43,8 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         viewFlipperDetalhes = findViewById(R.id.viewFlipperDetalhes);
         int idFilme = getIntent().getIntExtra(EXTRA_ID_FIME, -1);
         buscaDetalheFilmePorId(idFilme);
+        buscaFilmeSimilar(idFilme);
+
     }
 
     public void configuraLayout(DetalheFilme detalheFilme) {
@@ -81,6 +88,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         nome.setText(detalheFilme.getNomeFilme());
         duracao.setText((detalheFilme.getTempoFilme() + (" minutos")));
         genero.setText(generoFormatado(detalheFilme.getGeneros()));
+
     }
 
     private String generoFormatado(List<Genero> generos) {
@@ -107,6 +115,38 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DetalheFilme> call, Throwable t) {
+                Toast.makeText(DetalhesFilmesActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void configuraFilmeSimilares(List<FilmeSimilar> filmeSimilar) {
+
+        final RecyclerView recyclerView = findViewById(R.id.recyclerFilmeSimilar);
+
+        FilmeSimilarAdapter filmeSimilarAdapter = new FilmeSimilarAdapter(filmeSimilar);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(filmeSimilarAdapter);
+    }
+
+    private void buscaFilmeSimilar(int idFilmeSimilar) {
+
+        Call<ResponseFilmeSimilar> call = new RetrofitConfiguracao().apiservice().getFilmeSimilares(idFilmeSimilar);
+        call.enqueue(new Callback<ResponseFilmeSimilar>() {
+            @Override
+            public void onResponse(Call<ResponseFilmeSimilar> call, Response<ResponseFilmeSimilar> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ResponseFilmeSimilar responseFilmeSimilar = response.body();
+                    configuraFilmeSimilares(responseFilmeSimilar.getFilmeSimilar());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseFilmeSimilar> call, Throwable t) {
                 Toast.makeText(DetalhesFilmesActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
