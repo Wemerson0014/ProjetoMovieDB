@@ -1,4 +1,4 @@
-package br.com.estudo.projetomoviedb.principal;
+package br.com.estudo.projetomoviedb.ui.detalhes;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,26 +14,29 @@ import java.util.List;
 
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.model.FilmeSimilar;
+import br.com.estudo.projetomoviedb.ui.OnClickListenerFilmeSimilar;
 
-public class FilmeSimilarAdapter extends RecyclerView.Adapter<FilmeSimilarAdapter.MyViewHolder> {
+public class FilmeSimilarAdapter extends RecyclerView.Adapter<FilmeSimilarAdapter.MeuViewHolder> {
 
     private List<FilmeSimilar> filmeSimilar;
+    private OnClickListenerFilmeSimilar onClickListenerFilmeSimilar;
 
-    public FilmeSimilarAdapter(List<FilmeSimilar> filmeSimilar) {
+    FilmeSimilarAdapter(List<FilmeSimilar> filmeSimilar, OnClickListenerFilmeSimilar onClickListenerFilmeSimilar) {
         this.filmeSimilar = filmeSimilar;
+        this.onClickListenerFilmeSimilar = onClickListenerFilmeSimilar;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public MeuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View itemFilmeSimilar = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filmes_similares, parent, false);
-        return new MyViewHolder(itemFilmeSimilar);
+        return new MeuViewHolder(itemFilmeSimilar);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
+    public void onBindViewHolder(@NonNull MeuViewHolder meuViewHolder, int position) {
         FilmeSimilar filmesimilar = this.filmeSimilar.get(position);
-        myViewHolder.configuraFilmeSimilarView(filmesimilar);
+        meuViewHolder.configuraFilmeSimilarView(filmesimilar, onClickListenerFilmeSimilar);
 
     }
 
@@ -42,22 +45,28 @@ public class FilmeSimilarAdapter extends RecyclerView.Adapter<FilmeSimilarAdapte
         return filmeSimilar.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MeuViewHolder extends RecyclerView.ViewHolder {
         ImageView capaSimilar;
         TextView nomeFilmeSimilar;
 
-        MyViewHolder(@NonNull View itemView) {
+        MeuViewHolder(@NonNull View itemView) {
             super(itemView);
 
             capaSimilar = itemView.findViewById(R.id.imageFilmeSimilar);
             nomeFilmeSimilar = itemView.findViewById(R.id.textNomeFilmeSimilar);
         }
 
-        private void configuraFilmeSimilarView(final FilmeSimilar filmeSimilar) {
+        private void configuraFilmeSimilarView(final FilmeSimilar filmeSimilar, final OnClickListenerFilmeSimilar onClickListenerFilmeSimilar) {
             Glide.with(itemView.getContext())
                     .load("https://image.tmdb.org/t/p/w342" + filmeSimilar.getCapaFilmeSimilar())
                     .into(capaSimilar);
             nomeFilmeSimilar.setText(filmeSimilar.getNomeFilmeSimilar());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListenerFilmeSimilar.filmeSimilarCliclado(filmeSimilar);
+                }
+            });
         }
     }
 }

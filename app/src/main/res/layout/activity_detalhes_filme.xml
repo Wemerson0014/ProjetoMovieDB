@@ -21,7 +21,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".detalhes.DetalhesFilmesActivity">
+            tools:context=".ui.detalhes.DetalhesFilmesActivity">
 
             <TextView
                 android:id="@+id/textSinopse"
@@ -111,23 +111,31 @@
                 android:id="@+id/recyclerFilmeSimilar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/textFilmesSimilares"
-                app:layout_constraintStart_toStartOf="@+id/textFilmesSimilares"
-                app:layout_constraintTop_toBottomOf="@+id/textFilmesSimilares" />
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:paddingStart="16dp"
+                android:clipToPadding="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textFilmesSimilares"
+                tools:listitem="@layout/item_filmes_similares"
+                tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:orientation="horizontal"/>
 
             <TextView
                 android:id="@+id/textFilmesSimilares"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/text_filmes_similares"
                 android:textAlignment="textStart"
                 android:textAllCaps="true"
+                android:textColor="@color/texto_similar"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textSinopse"
                 app:layout_constraintStart_toStartOf="@+id/textSinopse"
-                app:layout_constraintTop_toBottomOf="@+id/textSinopse"
-                tools:text="@string/text_filmes_similares" />
+                app:layout_constraintTop_toBottomOf="@+id/textSinopse" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

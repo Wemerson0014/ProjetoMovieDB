@@ -1,7 +1,7 @@
-package br.com.estudo.projetomoviedb.principal;
+package br.com.estudo.projetomoviedb.ui;
 
 import br.com.estudo.projetomoviedb.model.Filme;
 
-public interface OnClickListener {
+public interface OnClickListenerFilme {
     void filmeCliclado(Filme filme);
 }

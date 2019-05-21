@@ -1,5 +1,6 @@
-package br.com.estudo.projetomoviedb.detalhes;
+package br.com.estudo.projetomoviedb.ui.detalhes;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,7 +25,7 @@ import br.com.estudo.projetomoviedb.model.FilmeSimilar;
 import br.com.estudo.projetomoviedb.model.Genero;
 import br.com.estudo.projetomoviedb.model.ResponseFilmeSimilar;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
-import br.com.estudo.projetomoviedb.principal.FilmeSimilarAdapter;
+import br.com.estudo.projetomoviedb.ui.OnClickListenerFilmeSimilar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -124,7 +125,14 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerFilmeSimilar);
 
-        FilmeSimilarAdapter filmeSimilarAdapter = new FilmeSimilarAdapter(filmeSimilar);
+        FilmeSimilarAdapter filmeSimilarAdapter = new FilmeSimilarAdapter(filmeSimilar, new OnClickListenerFilmeSimilar() {
+            @Override
+            public void filmeSimilarCliclado(FilmeSimilar filmeSimilar) {
+                Intent intent = new Intent(getApplicationContext(), DetalhesFilmesActivity.class);
+                intent.putExtra(EXTRA_ID_FIME, filmeSimilar.getIdFilmeSimilar());
+                startActivity(intent);
+            }
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
