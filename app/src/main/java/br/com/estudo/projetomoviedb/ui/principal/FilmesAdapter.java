@@ -69,7 +69,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickListenerFilme.filmeCliclado(filme);
+                    onClickListenerFilme.filmeCliclado(filme.getId());
                 }
             });
         }

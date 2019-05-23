@@ -14,16 +14,16 @@ import java.util.List;
 
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.model.FilmeSimilar;
-import br.com.estudo.projetomoviedb.ui.OnClickListenerFilmeSimilar;
+import br.com.estudo.projetomoviedb.ui.OnClickListenerFilme;
 
 public class FilmeSimilarAdapter extends RecyclerView.Adapter<FilmeSimilarAdapter.MeuViewHolder> {
 
     private List<FilmeSimilar> filmeSimilar;
-    private OnClickListenerFilmeSimilar onClickListenerFilmeSimilar;
+    private OnClickListenerFilme onClickListenerFilme;
 
-    FilmeSimilarAdapter(List<FilmeSimilar> filmeSimilar, OnClickListenerFilmeSimilar onClickListenerFilmeSimilar) {
+    FilmeSimilarAdapter(List<FilmeSimilar> filmeSimilar, OnClickListenerFilme onClickListenerFilme) {
         this.filmeSimilar = filmeSimilar;
-        this.onClickListenerFilmeSimilar = onClickListenerFilmeSimilar;
+        this.onClickListenerFilme = onClickListenerFilme;
     }
 
     @NonNull
@@ -36,8 +36,7 @@ public class FilmeSimilarAdapter extends RecyclerView.Adapter<FilmeSimilarAdapte
     @Override
     public void onBindViewHolder(@NonNull MeuViewHolder meuViewHolder, int position) {
         FilmeSimilar filmesimilar = this.filmeSimilar.get(position);
-        meuViewHolder.configuraFilmeSimilarView(filmesimilar, onClickListenerFilmeSimilar);
-
+        meuViewHolder.configuraFilmeSimilarView(filmesimilar, onClickListenerFilme);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class FilmeSimilarAdapter extends RecyclerView.Adapter<FilmeSimilarAdapte
             nomeFilmeSimilar = itemView.findViewById(R.id.textNomeFilmeSimilar);
         }
 
-        private void configuraFilmeSimilarView(final FilmeSimilar filmeSimilar, final OnClickListenerFilmeSimilar onClickListenerFilmeSimilar) {
+        private void configuraFilmeSimilarView(final FilmeSimilar filmeSimilar, final OnClickListenerFilme onClickListenerFilme) {
             Glide.with(itemView.getContext())
                     .load("https://image.tmdb.org/t/p/w342" + filmeSimilar.getCapaFilmeSimilar())
                     .into(capaSimilar);
@@ -64,7 +63,7 @@ public class FilmeSimilarAdapter extends RecyclerView.Adapter<FilmeSimilarAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickListenerFilmeSimilar.filmeSimilarCliclado(filmeSimilar);
+                    onClickListenerFilme.filmeCliclado(filmeSimilar.getIdFilmeSimilar());
                 }
             });
         }

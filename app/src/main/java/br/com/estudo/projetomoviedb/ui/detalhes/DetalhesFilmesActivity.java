@@ -25,7 +25,7 @@ import br.com.estudo.projetomoviedb.model.FilmeSimilar;
 import br.com.estudo.projetomoviedb.model.Genero;
 import br.com.estudo.projetomoviedb.model.ResponseFilmeSimilar;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
-import br.com.estudo.projetomoviedb.ui.OnClickListenerFilmeSimilar;
+import br.com.estudo.projetomoviedb.ui.OnClickListenerFilme;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -121,15 +121,15 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         });
     }
 
-    private void configuraFilmeSimilares(List<FilmeSimilar> filmeSimilar) {
+    private void configuraFilmeSimilares(final List<FilmeSimilar> filmeSimilar) {
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerFilmeSimilar);
 
-        FilmeSimilarAdapter filmeSimilarAdapter = new FilmeSimilarAdapter(filmeSimilar, new OnClickListenerFilmeSimilar() {
+        FilmeSimilarAdapter filmeSimilarAdapter = new FilmeSimilarAdapter(filmeSimilar, new OnClickListenerFilme() {
             @Override
-            public void filmeSimilarCliclado(FilmeSimilar filmeSimilar) {
+            public void filmeCliclado(int id) {
                 Intent intent = new Intent(getApplicationContext(), DetalhesFilmesActivity.class);
-                intent.putExtra(EXTRA_ID_FIME, filmeSimilar.getIdFilmeSimilar());
+                intent.putExtra(EXTRA_ID_FIME, id);
                 startActivity(intent);
             }
         });

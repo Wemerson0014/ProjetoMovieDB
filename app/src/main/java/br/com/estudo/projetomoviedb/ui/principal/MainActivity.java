@@ -38,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void configuraRecyclerView(List<Filme> filmes) {
+    public void configuraRecyclerView(final List<Filme> filmes) {
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerFilmes);
 
         FilmesAdapter filmesAdapter = new FilmesAdapter(filmes, new OnClickListenerFilme() {
             @Override
-            public void filmeCliclado(Filme filme) {
+            public void filmeCliclado(int id) {
                 Intent intent = new Intent(getApplicationContext(), DetalhesFilmesActivity.class);
-                intent.putExtra(EXTRA_ID_FIME, filme.getId());
+                intent.putExtra(EXTRA_ID_FIME, id);
                 startActivity(intent);
             }
         });
