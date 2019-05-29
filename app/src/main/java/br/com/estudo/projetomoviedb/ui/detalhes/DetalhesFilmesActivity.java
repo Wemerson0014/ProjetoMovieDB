@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.Group;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -149,7 +152,12 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseFilmeSimilar> call, Response<ResponseFilmeSimilar> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ResponseFilmeSimilar responseFilmeSimilar = response.body();
-                    configuraFilmeSimilares(responseFilmeSimilar.getFilmeSimilar());
+                    if (!responseFilmeSimilar.getFilmesSimilar().isEmpty()) {
+                        configuraFilmeSimilares(responseFilmeSimilar.getFilmesSimilar());
+                    } else {
+                        final Group viewGroup = findViewById(R.id.grupoSessaoSimilar);
+                        viewGroup.setVisibility(View.GONE);
+                    }
                 }
             }
 

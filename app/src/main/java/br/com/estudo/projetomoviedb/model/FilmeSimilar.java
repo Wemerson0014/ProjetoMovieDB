@@ -2,7 +2,6 @@ package br.com.estudo.projetomoviedb.model;
 
 import com.google.gson.annotations.SerializedName;
 
-
 public class FilmeSimilar {
 
     @SerializedName("id")

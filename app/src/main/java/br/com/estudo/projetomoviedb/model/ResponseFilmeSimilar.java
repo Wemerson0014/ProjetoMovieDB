@@ -7,9 +7,9 @@ import java.util.List;
 public class ResponseFilmeSimilar {
 
     @SerializedName("results")
-    private List<FilmeSimilar> filmeSimilar;
+    private List<FilmeSimilar> filmesSimilar;
 
-    public List<FilmeSimilar> getFilmeSimilar() {
-        return filmeSimilar;
+    public List<FilmeSimilar> getFilmesSimilar() {
+        return filmesSimilar;
     }
 }
