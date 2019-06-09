@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +46,6 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         viewFlipperDetalhes = findViewById(R.id.viewFlipperDetalhes);
         int idFilme = getIntent().getIntExtra(EXTRA_ID_FIME, -1);
         buscaDetalheFilmePorId(idFilme);
-        buscaFilmeSimilar(idFilme);
 
     }
 
@@ -104,7 +102,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         return nomeGenero.substring(0, nomeGenero.length() - 2);
     }
 
-    private void buscaDetalheFilmePorId(int idFilme) {
+    private void buscaDetalheFilmePorId(final int idFilme) {
 
         Call<DetalheFilme> call = new RetrofitConfiguracao().apiservice().getDetalheFilmePorId(idFilme);
         call.enqueue(new Callback<DetalheFilme>() {
@@ -113,8 +111,9 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     DetalheFilme detalheFilme = response.body();
                     configuraLayout(detalheFilme);
-                    viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
+                    buscaFilmeSimilar(idFilme);
                 }
+                viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
             }
 
             @Override
@@ -127,6 +126,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
     private void configuraFilmeSimilares(final List<FilmeSimilar> filmeSimilar) {
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerFilmeSimilar);
+        final TextView filmesSimilares = findViewById(R.id.textFilmesSimilares);
 
         FilmeSimilarAdapter filmeSimilarAdapter = new FilmeSimilarAdapter(filmeSimilar, new OnClickListenerFilme() {
             @Override
@@ -142,6 +142,9 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(filmeSimilarAdapter);
+
+        filmesSimilares.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
     private void buscaFilmeSimilar(int idFilmeSimilar) {
@@ -154,9 +157,6 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                     ResponseFilmeSimilar responseFilmeSimilar = response.body();
                     if (!responseFilmeSimilar.getFilmesSimilar().isEmpty()) {
                         configuraFilmeSimilares(responseFilmeSimilar.getFilmesSimilar());
-                    } else {
-                        final Group viewGroup = findViewById(R.id.grupoSessaoSimilar);
-                        viewGroup.setVisibility(View.GONE);
                     }
                 }
             }
