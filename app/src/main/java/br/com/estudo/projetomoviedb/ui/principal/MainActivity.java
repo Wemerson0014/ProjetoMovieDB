@@ -1,4 +1,4 @@
-package br.com.estudo.projetomoviedb.principal;
+package br.com.estudo.projetomoviedb.ui.principal;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,16 +11,17 @@ import android.widget.ViewFlipper;
 import java.util.List;
 
 import br.com.estudo.projetomoviedb.R;
-import br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity;
+import br.com.estudo.projetomoviedb.ui.detalhes.DetalhesFilmesActivity;
 import br.com.estudo.projetomoviedb.model.Filme;
 import br.com.estudo.projetomoviedb.model.ResponseFilme;
 import br.com.estudo.projetomoviedb.network.ApiService;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
+import br.com.estudo.projetomoviedb.ui.OnClickListenerFilme;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity.EXTRA_ID_FIME;
+import static br.com.estudo.projetomoviedb.ui.detalhes.DetalhesFilmesActivity.EXTRA_ID_FIME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void configuraRecyclerView(List<Filme> filmes) {
+    public void configuraRecyclerView(final List<Filme> filmes) {
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerFilmes);
 
-        FilmesAdapter filmesAdapter = new FilmesAdapter(filmes, new OnClickListener() {
+        FilmesAdapter filmesAdapter = new FilmesAdapter(filmes, new OnClickListenerFilme() {
             @Override
-            public void filmeCliclado(Filme filme) {
+            public void filmeCliclado(int id) {
                 Intent intent = new Intent(getApplicationContext(), DetalhesFilmesActivity.class);
-                intent.putExtra(EXTRA_ID_FIME, filme.getId());
+                intent.putExtra(EXTRA_ID_FIME, id);
                 startActivity(intent);
             }
         });

@@ -8,4 +8,7 @@
     <string name="text_avaliacao">Avaliacao, %s</string>
     <string name="text_duracao_filme">Duracao do filme, %s</string>
     <string name="text_minutos">minutos, %s</string>
+    <string name="text_nome_filme_similar">Nome do filme similar</string>
+    <string name="image_filme_similar">Capa do filme similar</string>
+    <string name="text_filmes_similares">Filmes similares</string>
 </resources>

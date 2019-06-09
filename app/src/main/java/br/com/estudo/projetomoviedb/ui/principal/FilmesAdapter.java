@@ -1,7 +1,8 @@
-package br.com.estudo.projetomoviedb.principal;
+package br.com.estudo.projetomoviedb.ui.principal;
 
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.model.Filme;
+import br.com.estudo.projetomoviedb.ui.OnClickListenerFilme;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -18,11 +19,11 @@ import com.bumptech.glide.Glide;
 public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHolder> {
 
     private List<Filme> filmes;
-    private OnClickListener onClickListener;
+    private OnClickListenerFilme onClickListenerFilme;
 
-    FilmesAdapter(List<Filme> filmes, OnClickListener onClickListener) {
+    FilmesAdapter(List<Filme> filmes, OnClickListenerFilme onClickListenerFilme) {
         this.filmes = filmes;
-        this.onClickListener = onClickListener;
+        this.onClickListenerFilme = onClickListenerFilme;
     }
 
     @NonNull
@@ -37,7 +38,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
     public void onBindViewHolder(@NonNull MeuViewHolder meuViewHolder, int position) {
 
         Filme filme = this.filmes.get(position);
-        meuViewHolder.configuraView(filme, onClickListener);
+        meuViewHolder.configuraView(filme, onClickListenerFilme);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
             capa = itemView.findViewById(R.id.imageCapa);
         }
 
-        private void configuraView(final Filme filme, final OnClickListener onClickListener) {
+        private void configuraView(final Filme filme, final OnClickListenerFilme onClickListenerFilme) {
             nome.setText(filme.getNome());
             estreia.setText(filme.getEstreia());
             Glide.with(itemView.getContext())
@@ -68,7 +69,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickListener.filmeCliclado(filme);
+                    onClickListenerFilme.filmeCliclado(filme.getId());
                 }
             });
         }
