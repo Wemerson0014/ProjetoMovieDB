@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Projeto MovieDB</string>
+    <string name="app_name">Estreias</string>
     <string name="text_nome">Nome do filme</string>
     <string name="text_estreia">Data de estreia do filme</string>
     <string name="text_sinopse">Sinopse</string>
@@ -11,4 +11,5 @@
     <string name="text_nome_filme_similar">Nome do filme similar</string>
     <string name="image_filme_similar">Capa do filme similar</string>
     <string name="text_filmes_similares">Filmes similares</string>
+    <string name="text_toolbar_principal">Estreias</string>
 </resources>

@@ -21,7 +21,17 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.detalhes.DetalhesFilmesActivity">
+            tools:context=".ui.detalhes.DetalhesFilmesActivity"
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_detalhes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imagePoster"
+                android:background="@color/colorPrimaryDark"/>
 
             <ImageView
                 android:id="@+id/imagePoster"
