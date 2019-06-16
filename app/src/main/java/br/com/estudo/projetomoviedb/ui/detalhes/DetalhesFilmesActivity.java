@@ -2,6 +2,7 @@ package br.com.estudo.projetomoviedb.ui.detalhes;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import java.util.List;
+import java.util.Objects;
 
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.model.DetalheFilme;
@@ -35,6 +40,7 @@ import retrofit2.Response;
 public class DetalhesFilmesActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID_FIME = "extra_id_filme";
+    private String homepage;
     public static final int CONTEUDO_DETALHES = 1;
     private ViewFlipper viewFlipperDetalhes;
 
@@ -43,10 +49,41 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_filme);
 
-        viewFlipperDetalhes = findViewById(R.id.viewFlipperDetalhes);
         int idFilme = getIntent().getIntExtra(EXTRA_ID_FIME, -1);
-        buscaDetalheFilmePorId(idFilme);
 
+        viewFlipperDetalhes = findViewById(R.id.viewFlipperDetalhes);
+
+        configuraToolbar();
+        buscaDetalheFilmePorId(idFilme);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_detalhe_filme, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.compartilhar) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(homepage));
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void configuraToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar_detalhes);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void configuraLayout(DetalheFilme detalheFilme) {
@@ -110,6 +147,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
             public void onResponse(Call<DetalheFilme> call, Response<DetalheFilme> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     DetalheFilme detalheFilme = response.body();
+                    homepage = detalheFilme.getPaginaDoFilme();
                     configuraLayout(detalheFilme);
                     buscaFilmeSimilar(idFilme);
                 }

@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int CONTEUDO_PRINCIPAL = 1;
     private ViewFlipper viewFlipperPrincipal;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +35,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewFlipperPrincipal = findViewById(R.id.viewFlipperPrincipal);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.text_toolbar_principal);
-        buscaFilmes();
 
+        configuraToolbar();
+        buscaFilmes();
+    }
+
+    private void configuraToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.text_toolbar_principal);
+        setSupportActionBar(toolbar);
     }
 
     public void configuraRecyclerView(final List<Filme> filmes) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="texto_similar">#3700B3</color>
+    <color name="colorPrimaryDark">#455a64</color>
+    <color name="colorPrimary">#607d8b</color>
+    <color name="colorAccent">#607d8b</color>
+    <color name="texto_similar">#3f51b5</color>
+    <color name="text">#212121</color>
     <color name="texto_toolbar_principal">#FFFFFF</color>
-    <color name="transpartente">#000000</color>
 </resources>

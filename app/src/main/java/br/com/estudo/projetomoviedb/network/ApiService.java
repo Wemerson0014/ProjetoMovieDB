@@ -1,7 +1,6 @@
 package br.com.estudo.projetomoviedb.network;
 
 import br.com.estudo.projetomoviedb.model.DetalheFilme;
-import br.com.estudo.projetomoviedb.model.FilmeSimilar;
 import br.com.estudo.projetomoviedb.model.ResponseFilme;
 import br.com.estudo.projetomoviedb.model.ResponseFilmeSimilar;
 import retrofit2.Call;
