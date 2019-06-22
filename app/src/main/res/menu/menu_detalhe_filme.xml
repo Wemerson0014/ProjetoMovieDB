@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/compartilhar"
-        android:icon="@drawable/ic_compartilhar"
+        android:icon="@drawable/ic_pagina_filme"
         android:title="@string/icone_compartilhar"
-        app:showAsAction="always" />
+        android:visible="false"
+        app:showAsAction="always"
+        tools:visible="true" />
 </menu>

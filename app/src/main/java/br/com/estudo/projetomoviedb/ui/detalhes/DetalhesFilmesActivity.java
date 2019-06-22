@@ -43,6 +43,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
     private String homepage;
     public static final int CONTEUDO_DETALHES = 1;
     private ViewFlipper viewFlipperDetalhes;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +75,14 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void configuraBotaoCompartilhar(String homepage) {
+        if (homepage != null){
+            toolbar.getMenu().findItem(R.id.compartilhar).setVisible(true);
+        }
+    }
+
     private void configuraToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar_detalhes);
+        toolbar = findViewById(R.id.toolbar_detalhes);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -103,6 +110,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         nome = findViewById(R.id.textNome);
         duracao = findViewById(R.id.textDuracaoFilme);
         genero = findViewById(R.id.textGenero);
+
 
         sinopse.setText(detalheFilme.getSinopse());
         Glide.with(this)
@@ -148,6 +156,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     DetalheFilme detalheFilme = response.body();
                     homepage = detalheFilme.getPaginaDoFilme();
+                    configuraBotaoCompartilhar(homepage);
                     configuraLayout(detalheFilme);
                     buscaFilmeSimilar(idFilme);
                 }
