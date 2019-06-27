@@ -67,17 +67,36 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.compartilhar) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(homepage));
-            startActivity(intent);
+        switch (item.getItemId()) {
+            case R.id.pagina_filme:
+                acessaPaginaFilme();
+                return true;
+            case R.id.compartilhar:
+                acaoCompartilhar();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
-    private void configuraBotaoCompartilhar(String homepage) {
-        if (homepage != null){
-            toolbar.getMenu().findItem(R.id.compartilhar).setVisible(true);
+    private void acessaPaginaFilme() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(homepage));
+        startActivity(intent);
+    }
+
+    private void acaoCompartilhar() {
+        String mensagem = getResources().getString(R.string.text_mensagem_compartilhada, homepage);
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, mensagem);
+        intent.setType("text/plain");
+        startActivity(intent);
+    }
+
+    private void configuraBotaoPaginaFilme(String homepage) {
+        if (homepage != null) {
+            toolbar.getMenu().setGroupVisible(R.id.grupo_menu, true);
         }
     }
 
@@ -156,7 +175,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     DetalheFilme detalheFilme = response.body();
                     homepage = detalheFilme.getPaginaDoFilme();
-                    configuraBotaoCompartilhar(homepage);
+                    configuraBotaoPaginaFilme(homepage);
                     configuraLayout(detalheFilme);
                     buscaFilmeSimilar(idFilme);
                 }

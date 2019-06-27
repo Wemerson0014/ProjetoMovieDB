@@ -2,11 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <item
-        android:id="@+id/compartilhar"
-        android:icon="@drawable/ic_pagina_filme"
-        android:title="@string/icone_compartilhar"
-        android:visible="false"
-        app:showAsAction="always"
-        tools:visible="true" />
+    <group
+        android:id="@+id/grupo_menu"
+        android:visible="false">
+        <item
+            android:id="@+id/pagina_filme"
+            android:icon="@drawable/ic_pagina_filme"
+            android:title="@string/icone_pagina_filme"
+            app:showAsAction="ifRoom"
+            tools:visible="true" />
+        <item
+            android:id="@+id/compartilhar"
+            android:icon="@drawable/ic_compartilhar"
+            android:title="@string/icone_compartilhar"
+            app:showAsAction="ifRoom" />
+    </group>
 </menu>
