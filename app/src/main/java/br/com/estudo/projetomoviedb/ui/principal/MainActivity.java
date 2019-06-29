@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -34,8 +35,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewFlipperPrincipal = findViewById(R.id.viewFlipperPrincipal);
-        buscaFilmes();
 
+        configuraToolbar();
+        buscaFilmes();
+    }
+
+    private void configuraToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.text_toolbar_principal);
+        setSupportActionBar(toolbar);
     }
 
     public void configuraRecyclerView(final List<Filme> filmes) {
