@@ -69,23 +69,23 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.pagina_filme:
-                acessaPaginaFilme();
+                acessarPaginaFilme();
                 return true;
             case R.id.compartilhar:
-                acaoCompartilhar();
+                compartilharFilme();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void acessaPaginaFilme() {
+    private void acessarPaginaFilme() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(homepage));
         startActivity(intent);
     }
 
-    private void acaoCompartilhar() {
+    private void compartilharFilme() {
         String mensagem = getResources().getString(R.string.text_mensagem_compartilhada, homepage);
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
@@ -94,10 +94,8 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void configuraBotaoPaginaFilme(String homepage) {
-        if (homepage != null) {
-            toolbar.getMenu().setGroupVisible(R.id.grupo_menu, true);
-        }
+    private void exibeMenuToolbar() {
+        toolbar.getMenu().setGroupVisible(R.id.grupo_menu, true);
     }
 
     private void configuraToolbar() {
@@ -129,7 +127,6 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         nome = findViewById(R.id.textNome);
         duracao = findViewById(R.id.textDuracaoFilme);
         genero = findViewById(R.id.textGenero);
-
 
         sinopse.setText(detalheFilme.getSinopse());
         Glide.with(this)
@@ -175,7 +172,9 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     DetalheFilme detalheFilme = response.body();
                     homepage = detalheFilme.getPaginaDoFilme();
-                    configuraBotaoPaginaFilme(homepage);
+                    if (homepage != null) {
+                        exibeMenuToolbar();
+                    }
                     configuraLayout(detalheFilme);
                     buscaFilmeSimilar(idFilme);
                 }
