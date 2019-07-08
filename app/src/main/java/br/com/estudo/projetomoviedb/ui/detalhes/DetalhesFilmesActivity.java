@@ -33,6 +33,7 @@ import br.com.estudo.projetomoviedb.model.Genero;
 import br.com.estudo.projetomoviedb.model.ResponseFilmeSimilar;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
 import br.com.estudo.projetomoviedb.ui.OnClickListenerFilme;
+import br.com.estudo.projetomoviedb.ui.principal.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -105,7 +106,9 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(getApplication(), MainActivity.class);
+                startActivity(intent);
+                DetalhesFilmesActivity.this.finish();
             }
         });
     }
