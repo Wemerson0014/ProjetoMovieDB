@@ -116,21 +116,13 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
 
     public void configuraLayout(DetalheFilme detalheFilme) {
 
-        final ImageView poster;
-        TextView sinopse;
-        ImageView capa;
-        TextView avaliacao;
-        TextView nome;
-        TextView duracao;
-        TextView genero;
-
-        sinopse = findViewById(R.id.textSinopse);
-        poster = findViewById(R.id.imagePoster);
-        capa = findViewById(R.id.imageCapa);
-        avaliacao = findViewById(R.id.textAvaliacao);
-        nome = findViewById(R.id.textNome);
-        duracao = findViewById(R.id.textDuracaoFilme);
-        genero = findViewById(R.id.textGenero);
+        final ImageView poster = findViewById(R.id.imagePoster);
+        TextView sinopse = findViewById(R.id.textSinopse);
+        ImageView capa = findViewById(R.id.imageCapa);
+        TextView avaliacao = findViewById(R.id.textAvaliacao);
+        TextView nome = findViewById(R.id.textNome);
+        TextView duracao = findViewById(R.id.textDuracaoFilme);
+        TextView genero = findViewById(R.id.textGenero);
 
         sinopse.setText(detalheFilme.getSinopse());
         Glide.with(this)
@@ -182,7 +174,6 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                     configuraLayout(detalheFilme);
                     buscaFilmeSimilar(idFilme);
                 }
-                viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
             }
 
             @Override
@@ -228,6 +219,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                         configuraFilmeSimilares(responseFilmeSimilar.getFilmesSimilar());
                     }
                 }
+                viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
             }
 
             @Override
