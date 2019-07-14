@@ -12,7 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.bumptech.glide.Glide;
 
@@ -62,7 +66,7 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
 
         private void configuraView(final Filme filme, final OnClickListenerFilme onClickListenerFilme) {
             nome.setText(filme.getNome());
-            estreia.setText(filme.getEstreia());
+            estreia.setText(getDataFormatada(filme.getEstreia()));
             Glide.with(itemView.getContext())
                     .load("https://image.tmdb.org/t/p/w342" + filme.getCapa())
                     .into(capa);
@@ -73,5 +77,16 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
                 }
             });
         }
+    }
+
+    private String getDataFormatada(String dataEstreia) {
+        String dataFormatada;
+        try {
+            Date date = new SimpleDateFormat("y-MM-dd", Locale.getDefault()).parse(dataEstreia);
+            dataFormatada = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date);
+        } catch (ParseException e) {
+            dataFormatada = dataEstreia;
+        }
+        return dataFormatada;
     }
 }

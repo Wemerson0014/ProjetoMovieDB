@@ -33,6 +33,7 @@ import br.com.estudo.projetomoviedb.model.Genero;
 import br.com.estudo.projetomoviedb.model.ResponseFilmeSimilar;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
 import br.com.estudo.projetomoviedb.ui.OnClickListenerFilme;
+import br.com.estudo.projetomoviedb.ui.principal.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -105,6 +106,9 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 finish();
             }
         });
@@ -112,21 +116,13 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
 
     public void configuraLayout(DetalheFilme detalheFilme) {
 
-        final ImageView poster;
-        TextView sinopse;
-        ImageView capa;
-        TextView avaliacao;
-        TextView nome;
-        TextView duracao;
-        TextView genero;
-
-        sinopse = findViewById(R.id.textSinopse);
-        poster = findViewById(R.id.imagePoster);
-        capa = findViewById(R.id.imageCapa);
-        avaliacao = findViewById(R.id.textAvaliacao);
-        nome = findViewById(R.id.textNome);
-        duracao = findViewById(R.id.textDuracaoFilme);
-        genero = findViewById(R.id.textGenero);
+        final ImageView poster = findViewById(R.id.imagePoster);
+        TextView sinopse = findViewById(R.id.textSinopse);
+        ImageView capa = findViewById(R.id.imageCapa);
+        TextView avaliacao = findViewById(R.id.textAvaliacao);
+        TextView nome = findViewById(R.id.textNome);
+        TextView duracao = findViewById(R.id.textDuracaoFilme);
+        TextView genero = findViewById(R.id.textGenero);
 
         sinopse.setText(detalheFilme.getSinopse());
         Glide.with(this)
@@ -178,7 +174,6 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                     configuraLayout(detalheFilme);
                     buscaFilmeSimilar(idFilme);
                 }
-                viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
             }
 
             @Override
@@ -224,6 +219,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                         configuraFilmeSimilares(responseFilmeSimilar.getFilmesSimilar());
                     }
                 }
+                viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
             }
 
             @Override
