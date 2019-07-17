@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             app:titleTextColor="@color/texto_toolbar_principal"/>
 
         <android.support.v7.widget.RecyclerView
