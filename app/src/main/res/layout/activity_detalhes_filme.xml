@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewFlipperDetalhes"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <ProgressBar
         android:id="@+id/prgressbarCarregamento"
@@ -133,7 +134,7 @@
                 android:textAlignment="textStart"
                 tools:text="@string/text_filmes_similares"
                 android:textAllCaps="true"
-                android:textColor="@color/texto_similar"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/recyclerFilmeSimilar"
