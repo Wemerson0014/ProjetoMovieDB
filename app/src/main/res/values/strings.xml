@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Estreias</string>
+    <string name="app_name">MovieDB</string>
     <string name="text_nome">Nome do filme</string>
     <string name="text_estreia">Data de estreia do filme</string>
     <string name="text_sinopse">Sinopse</string>
@@ -16,4 +16,5 @@
     <string name="image_barra_busca">Barra de busca</string>
     <string name="icone_pagina_filme">Página do filme</string>
     <string name="icone_compartilhar">Compartilhar</string>
+    <string name="icone_logo">Logo</string>
 </resources>
