@@ -19,7 +19,6 @@ public class RetrofitConfiguracao {
             .addInterceptor(getLogging())
             .build();
 
-
     private Interceptor getLogging() {
         return new HttpLoggingInterceptor()
                 .setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -29,7 +28,10 @@ public class RetrofitConfiguracao {
         return new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                HttpUrl novaUrl = chain.request().url().newBuilder().addQueryParameter("api_key", BuildConfig.API_KEY).build();
+                HttpUrl novaUrl = chain.request().url().newBuilder()
+                        .addQueryParameter("api_key", BuildConfig.API_KEY)
+                        .addQueryParameter("language", BuildConfig.LANGUAGE)
+                        .build();
                 return chain.proceed(chain.request().newBuilder().url(novaUrl).build());
             }
         };

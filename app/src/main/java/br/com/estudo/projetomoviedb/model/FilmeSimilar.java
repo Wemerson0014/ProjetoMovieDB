@@ -8,7 +8,7 @@ public class FilmeSimilar {
     private final int idFilmeSimilar;
     @SerializedName("poster_path")
     private final String capaFilmeSimilar;
-    @SerializedName("original_title")
+    @SerializedName("title")
     private final String nomeFilmeSimilar;
 
     public FilmeSimilar(int idFilmeSimilar, String capaFilmeSimilar, String nomeFilmeSimilar) {
