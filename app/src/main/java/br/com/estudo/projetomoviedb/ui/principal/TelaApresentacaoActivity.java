@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import br.com.estudo.projetomoviedb.R;
 
-public class TelaApresentacaoActivity extends AppCompatActivity implements Runnable{
+public class TelaApresentacaoActivity extends AppCompatActivity implements Runnable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
