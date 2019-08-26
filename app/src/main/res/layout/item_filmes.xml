@@ -24,7 +24,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/amiko_bold"
         android:lines="1"
-        android:maxLines="13"
+        android:ellipsize="end"
         android:textColor="@color/text"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageCapa"
