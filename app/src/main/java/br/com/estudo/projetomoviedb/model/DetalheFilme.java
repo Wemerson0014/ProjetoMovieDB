@@ -7,7 +7,7 @@ import java.util.List;
 public class DetalheFilme {
 
     private final int id;
-    @SerializedName("original_title")
+    @SerializedName("title")
     private final String nomeFilme;
     @SerializedName("overview")
     private final String sinopse;
