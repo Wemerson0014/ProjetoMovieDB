@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Filme {
 
     private final int id;
-    @SerializedName("original_title")
+    @SerializedName("title")
     private final String nome;
     @SerializedName("poster_path")
     private final String capa;

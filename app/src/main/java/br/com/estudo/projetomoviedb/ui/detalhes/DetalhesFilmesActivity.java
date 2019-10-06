@@ -2,13 +2,17 @@ package br.com.estudo.projetomoviedb.ui.detalhes;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.Group;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import java.util.List;
+import java.util.Objects;
 
 import br.com.estudo.projetomoviedb.R;
 import br.com.estudo.projetomoviedb.model.DetalheFilme;
@@ -28,6 +33,7 @@ import br.com.estudo.projetomoviedb.model.Genero;
 import br.com.estudo.projetomoviedb.model.ResponseFilmeSimilar;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
 import br.com.estudo.projetomoviedb.ui.OnClickListenerFilme;
+import br.com.estudo.projetomoviedb.ui.principal.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,37 +41,88 @@ import retrofit2.Response;
 public class DetalhesFilmesActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID_FIME = "extra_id_filme";
+    private String homepage;
     public static final int CONTEUDO_DETALHES = 1;
     private ViewFlipper viewFlipperDetalhes;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_filme);
 
-        viewFlipperDetalhes = findViewById(R.id.viewFlipperDetalhes);
         int idFilme = getIntent().getIntExtra(EXTRA_ID_FIME, -1);
-        buscaDetalheFilmePorId(idFilme);
 
+        viewFlipperDetalhes = findViewById(R.id.viewFlipperDetalhes);
+
+        configuraToolbar();
+        buscaDetalheFilmePorId(idFilme);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_detalhe_filme, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.pagina_filme:
+                acessarPaginaFilme();
+                return true;
+            case R.id.compartilhar:
+                compartilharFilme();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void acessarPaginaFilme() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(homepage));
+        startActivity(intent);
+    }
+
+    private void compartilharFilme() {
+        String mensagem = getResources().getString(R.string.text_mensagem_compartilhada, homepage);
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, mensagem);
+        intent.setType("text/plain");
+        startActivity(intent);
+    }
+
+    private void exibeMenuToolbar() {
+        toolbar.getMenu().setGroupVisible(R.id.grupo_menu, true);
+    }
+
+    private void configuraToolbar() {
+        toolbar = findViewById(R.id.toolbar_detalhes);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void configuraLayout(DetalheFilme detalheFilme) {
 
-        final ImageView poster;
-        TextView sinopse;
-        ImageView capa;
-        TextView avaliacao;
-        TextView nome;
-        TextView duracao;
-        TextView genero;
-
-        sinopse = findViewById(R.id.textSinopse);
-        poster = findViewById(R.id.imagePoster);
-        capa = findViewById(R.id.imageCapa);
-        avaliacao = findViewById(R.id.textAvaliacao);
-        nome = findViewById(R.id.textNome);
-        duracao = findViewById(R.id.textDuracaoFilme);
-        genero = findViewById(R.id.textGenero);
+        final ImageView poster = findViewById(R.id.imagePoster);
+        TextView sinopse = findViewById(R.id.textSinopse);
+        ImageView capa = findViewById(R.id.imageCapa);
+        TextView avaliacao = findViewById(R.id.textAvaliacao);
+        TextView nome = findViewById(R.id.textNome);
+        TextView duracao = findViewById(R.id.textDuracaoFilme);
+        TextView genero = findViewById(R.id.textGenero);
 
         sinopse.setText(detalheFilme.getSinopse());
         Glide.with(this)
@@ -110,10 +167,13 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
             public void onResponse(Call<DetalheFilme> call, Response<DetalheFilme> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     DetalheFilme detalheFilme = response.body();
+                    homepage = detalheFilme.getPaginaDoFilme();
+                    if (homepage != null) {
+                        exibeMenuToolbar();
+                    }
                     configuraLayout(detalheFilme);
                     buscaFilmeSimilar(idFilme);
                 }
-                viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
             }
 
             @Override
@@ -159,6 +219,7 @@ public class DetalhesFilmesActivity extends AppCompatActivity {
                         configuraFilmeSimilares(responseFilmeSimilar.getFilmesSimilar());
                     }
                 }
+                viewFlipperDetalhes.setDisplayedChild(CONTEUDO_DETALHES);
             }
 
             @Override

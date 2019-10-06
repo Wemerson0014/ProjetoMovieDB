@@ -7,7 +7,7 @@ import java.util.List;
 public class DetalheFilme {
 
     private final int id;
-    @SerializedName("original_title")
+    @SerializedName("title")
     private final String nomeFilme;
     @SerializedName("overview")
     private final String sinopse;
@@ -21,8 +21,10 @@ public class DetalheFilme {
     private final String poster;
     @SerializedName("poster_path")
     private final String capa;
+    @SerializedName("homepage")
+    private final String paginaDoFilme;
 
-    public DetalheFilme(int id, String nomeFilme, String sinopse, List<Genero> generos, int tempoFilme, float avaliacao, String poster, String capa) {
+    public DetalheFilme(int id, String nomeFilme, String sinopse, List<Genero> generos, int tempoFilme, float avaliacao, String poster, String capa, String paginaDoFilme) {
         this.id = id;
         this.nomeFilme = nomeFilme;
         this.sinopse = sinopse;
@@ -31,6 +33,7 @@ public class DetalheFilme {
         this.avaliacao = avaliacao;
         this.poster = poster;
         this.capa = capa;
+        this.paginaDoFilme = paginaDoFilme;
     }
 
     public int getId() {
@@ -63,5 +66,9 @@ public class DetalheFilme {
 
     public String getCapa() {
         return capa;
+    }
+
+    public String getPaginaDoFilme() {
+        return paginaDoFilme;
     }
 }
