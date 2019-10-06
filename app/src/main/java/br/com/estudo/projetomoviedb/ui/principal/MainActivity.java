@@ -1,4 +1,4 @@
-package br.com.estudo.projetomoviedb.principal;
+package br.com.estudo.projetomoviedb.ui.principal;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,41 +6,47 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import java.util.List;
 
 import br.com.estudo.projetomoviedb.R;
-import br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity;
+import br.com.estudo.projetomoviedb.ui.detalhes.DetalhesFilmesActivity;
 import br.com.estudo.projetomoviedb.model.Filme;
 import br.com.estudo.projetomoviedb.model.ResponseFilme;
 import br.com.estudo.projetomoviedb.network.ApiService;
 import br.com.estudo.projetomoviedb.network.RetrofitConfiguracao;
+import br.com.estudo.projetomoviedb.ui.OnClickListenerFilme;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static br.com.estudo.projetomoviedb.detalhes.DetalhesFilmesActivity.EXTRA_ID_FIME;
+import static br.com.estudo.projetomoviedb.ui.detalhes.DetalhesFilmesActivity.EXTRA_ID_FIME;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final int CONTEUDO_PRINCIPAL = 1;
+    private ViewFlipper viewFlipperPrincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        viewFlipperPrincipal = findViewById(R.id.viewFlipperPrincipal);
         buscaFilmes();
 
     }
 
-    public void configuraRecyclerView(List<Filme> filmes) {
+    public void configuraRecyclerView(final List<Filme> filmes) {
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerFilmes);
 
-        FilmesAdapter filmesAdapter = new FilmesAdapter(filmes, new OnClickListener() {
+        FilmesAdapter filmesAdapter = new FilmesAdapter(filmes, new OnClickListenerFilme() {
             @Override
-            public void filmeCliclado(Filme filme) {
+            public void filmeCliclado(int id) {
                 Intent intent = new Intent(getApplicationContext(), DetalhesFilmesActivity.class);
-                intent.putExtra(EXTRA_ID_FIME, filme.getId());
+                intent.putExtra(EXTRA_ID_FIME, id);
                 startActivity(intent);
             }
         });
@@ -64,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Filme> filmes = response.body().getFilmes();
                     configuraRecyclerView(filmes);
+                    viewFlipperPrincipal.setDisplayedChild(CONTEUDO_PRINCIPAL);
                 }
             }
 
