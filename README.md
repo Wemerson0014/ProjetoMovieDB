@@ -49,7 +49,10 @@ Respectiva mensagem pronta para ser enviada a um contato escolhido. Aplicativo *
 
 ## Navegação na página oficial do filme
 
+
 Exibição da página do filme **Equalizer 2** aberta no navegador em um dispositivo móvel.
+
+
 
 <img src="https://user-images.githubusercontent.com/39638014/66277652-edce8e00-e877-11e9-98b4-825cb8703660.png" width="400">
 
