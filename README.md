@@ -1,7 +1,5 @@
 # ProjetoMovieDB
 
-[![Build Status](https://app.bitrise.io/app/7b05cee1d06d16d3/status.svg?token=7uvrK0sATdrztyV5lVZAyw&branch=master)](https://app.bitrise.io/app/7b05cee1d06d16d3)
-
 Esse aplicativo tem como objetivo exibir estreias de filmes após conexão com a API do site [MovieDB](https://www.themoviedb.org/?language=pt-BR). 
 
 
@@ -28,7 +26,7 @@ Na tela de Detalhes ainda é possível navegar escolhendo filmes similares abaix
 
 # Funcionalidades
 
-Dentro da Tela de Detalhes pode conter de 1 a 3 ícones sendo exibidos na parte superior. O ícone de seta a esquerda significa voltar a tela inicial, o ícone de globo significa visitar o site do filme e por último o ícone de compartilhamento que enviará uma mensagem de texto contendo o link
+Dentro da Tela de Detalhes pode conter de um a três ícones sendo exibidos na parte superior. O ícone de seta a esquerda significa voltar a tela inicial, o ícone de globo significa visitar o site do filme e por último o ícone de compartilhamento que enviará uma mensagem de texto contendo o link
 da página do filme que você gostaria de compartilhar com algum contato. 
 **IMPORTANTE: A exibição dos dois últimos ícones é dependente do retorno da API para serem ativos no aplicativo!!!**
 
