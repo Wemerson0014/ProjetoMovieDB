@@ -78,7 +78,7 @@ Android 4.4 KitKat - API 19 ou superior
 
 # Finalidades
 
-Este aplicativo foi contruído como forma de estudo utilizando-se da linguagem de programação [Java](https://docs.oracle.com/javase/8/docs/technotes/guides/language/index.html)
+Este aplicativo foi construído como forma de estudo utilizando-se da linguagem de programação [Java](https://docs.oracle.com/javase/8/docs/technotes/guides/language/index.html)
 voltada para [Android](https://www.android.com/intl/pt-BR_br/gms/). O aplicativo teve como objetivo conectar-se a API e retornar dados na tela inicial e de detalhes para os itens. 
 
 
